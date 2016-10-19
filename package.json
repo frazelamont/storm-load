@@ -24,7 +24,6 @@
     "build": "gulp build",
     "start": "gulp",
     "test": "istanbul cover _mocha --report lcovonly -- -R spec && codecov",
-    "test:cover": "istanbul cover _mocha",
     "test:watch": "NODE_ENV=test mocha --watch"
   },
   "dependencies": {
