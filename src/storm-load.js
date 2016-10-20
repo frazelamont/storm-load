@@ -1,4 +1,4 @@
-const createScript = url => {
+const create = url => {
     return new Promise(function(resolve) {
         if (!(/js$/.test(url))){
             console.log(url + " is not a js file");
@@ -11,14 +11,26 @@ const createScript = url => {
     });
 }
 
-export default urls => {
-    return new Promise(function(resolve) {
-        function next() {
+export const synchronous = urls => {
+    return new Promise((resolve, reject) => {
+        let next = () => {
             if (!urls.length) return resolve();
             let url = urls.shift();
-            //we're creating these sequentially, so they load in the order they're passed in
-            createScript(url).then(next);
-        }
+            create(url).then(next);
+        };
         next();
+    });
+};
+
+export default (urls, async = true) => {
+    if (!async) return synchronous(urls);
+
+    return new Promise((resolve, reject) => {
+        if(!!!Array.isArray(urls)) return reject(); 
+        
+        return Promise.all(urls.map(url => {
+                    return create(url); 
+                }))
+                .then(resolve, reject);
     });
 };
