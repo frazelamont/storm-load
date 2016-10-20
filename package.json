@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/mjbp/storm-load/issues"
   },
-  "main": "dist/storm-cload.min.js",
+  "main": "dist/storm-load.js",
   "keywords": [
     "stormid",
     "load",
