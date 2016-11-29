@@ -1,6 +1,6 @@
 {
   "name": "storm-load",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Lightweight promise-based script loader",
   "author": "stormid",
   "license": "MIT",
@@ -27,7 +27,16 @@
     "test:watch": "NODE_ENV=test mocha --watch"
   },
   "browserify": {
-    "transform": [["babelify", { "presets": ["es2015"] }]]
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
   },
   "devDependencies": {
     "babel": "^6.5.2",
