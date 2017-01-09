@@ -1,6 +1,6 @@
 {
   "name": "storm-load",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Lightweight promise-based script loader",
   "author": "stormid",
   "license": "MIT",
