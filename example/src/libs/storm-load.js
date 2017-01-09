@@ -1,15 +1,11 @@
 /**
  * @name storm-load: Lightweight promise-based script loader
- * @version 0.1.0: Thu, 20 Oct 2016 12:47:28 GMT
+ * @version 0.2.5: Mon, 09 Jan 2017 18:08:37 GMT
  * @author stormid
  * @license MIT
  */
 const create = url => {
     return new Promise(function(resolve) {
-        if (!(/js$/.test(url))){
-            console.log(url + " is not a js file");
-            return resolve();
-        }
         let script = document.createElement('script');
         script.src = url;
         document.head.appendChild(script);

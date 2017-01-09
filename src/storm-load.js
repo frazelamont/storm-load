@@ -1,9 +1,5 @@
 const create = url => {
     return new Promise(function(resolve) {
-        if (!(/js$/.test(url))){
-            console.log(url + " is not a js file");
-            return resolve();
-        }
         let script = document.createElement('script');
         script.src = url;
         document.head.appendChild(script);
