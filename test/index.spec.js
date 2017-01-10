@@ -15,14 +15,15 @@ describe('Load', () => {
   });
 
   it('should reject anything but an array', () => {
-    Load('//d3js.org/d3.v3.min.js').should.be.rejected();
+    //Load('//d3js.org/d3.v3.min.js').should.throw();
+    Load.bind(Load, '//d3js.org/d3.v3.min.js').should.throw();
   });
 
   it('should return promise fulfilled if passed an array of valid JS files', () => {
     loader.should.be.fulfilled();
   });
 
-  it('should reject a non-JS file in the array', () => {
+  it('should reject a file that cannot attached as a script', () => {
     Load(['//d3js.org/']).should.be.rejected();
   });
 
@@ -36,14 +37,14 @@ describe('Load synchronously', () => {
   });
 
   it('should reject anything but an array', () => {
-    Load('//d3js.org/d3.v3.min.js', false).should.be.rejected();
+    Load.bind(Load, '//d3js.org/d3.v3.min.js', false).should.throw();
   });
 
   it('should return promise fulfilled if passed an array of valid JS files', () => {
     loader.should.be.fulfilled();
   });
 
-  it('should reject a non-JS file in the array', () => {
+  it('should reject a file that cannot attached as a script', () => {
     Load(['//d3js.org/'], false).should.be.rejected();
   });
 
