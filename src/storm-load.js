@@ -11,8 +11,6 @@ const create = url => {
 };
 
 export const synchronous = urls => {
-	if(!Array.isArray(urls)) throw new Error('Must be an array of URLs');
-
 	return new Promise((resolve, reject) => {
 		let next = () => {
 			if (!urls.length) return resolve();
@@ -23,9 +21,8 @@ export const synchronous = urls => {
 };
 
 export default (urls, async = true) => {
+	urls = [].concat(urls);
 	if (!async) return synchronous(urls);
-	
-	if(!Array.isArray(urls)) throw new Error('Must be an array of URLs'); 
 
 	return Promise.all(urls.map(url => create(url)));
 };

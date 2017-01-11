@@ -1,6 +1,6 @@
 /**
  * @name storm-load: Lightweight promise-based script loader
- * @version 0.3.0: Tue, 10 Jan 2017 13:35:53 GMT
+ * @version 0.3.1: Wed, 11 Jan 2017 12:57:30 GMT
  * @author stormid
  * @license MIT
  */
@@ -36,8 +36,6 @@ var create = function create(url) {
 };
 
 var synchronous = exports.synchronous = function synchronous(urls) {
-	if (!Array.isArray(urls)) throw new Error('Must be an array of URLs');
-
 	return new Promise(function (resolve, reject) {
 		var next = function next() {
 			if (!urls.length) return resolve();
@@ -50,9 +48,8 @@ var synchronous = exports.synchronous = function synchronous(urls) {
 exports.default = function (urls) {
 	var async = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
+	urls = [].concat(urls);
 	if (!async) return synchronous(urls);
-
-	if (!Array.isArray(urls)) throw new Error('Must be an array of URLs');
 
 	return Promise.all(urls.map(function (url) {
 		return create(url);

@@ -14,9 +14,9 @@ describe('Load', () => {
     loader.should.be.a.Promise();
   });
 
-  it('should reject anything but an array', () => {
-    //Load('//d3js.org/d3.v3.min.js').should.throw();
-    Load.bind(Load, '//d3js.org/d3.v3.min.js').should.throw();
+  it('should convert single filenames into an array and load', () => {
+    //Load.bind(Load, '//d3js.org/d3.v3.min.js').should.throw();
+    Load('//d3js.org/d3.v3.min.js').should.be.fulfilled();
   });
 
   it('should return promise fulfilled if passed an array of valid JS files', () => {
@@ -37,7 +37,8 @@ describe('Load synchronously', () => {
   });
 
   it('should reject anything but an array', () => {
-    Load.bind(Load, '//d3js.org/d3.v3.min.js', false).should.throw();
+    //Load.bind(Load, '//d3js.org/d3.v3.min.js', false).should.throw();
+    Load('//d3js.org/d3.v3.min.js', false).should.be.fulfilled();
   });
 
   it('should return promise fulfilled if passed an array of valid JS files', () => {
