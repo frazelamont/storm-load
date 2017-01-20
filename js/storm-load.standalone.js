@@ -1,6 +1,6 @@
 /**
  * @name storm-load: Lightweight promise-based script loader
- * @version 0.1.0: Thu, 20 Oct 2016 12:55:45 GMT
+ * @version 0.4.0: Fri, 20 Jan 2017 16:57:35 GMT
  * @author stormid
  * @license MIT
  */
@@ -18,46 +18,41 @@
    }
 
 }(this, function(exports) {
-   "use strict";
+   'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+	value: true
 });
 var create = function create(url) {
-    return new Promise(function (resolve) {
-        if (!/js$/.test(url)) {
-            console.log(url + " is not a js file");
-            return resolve();
-        }
-        var script = document.createElement('script');
-        script.src = url;
-        document.head.appendChild(script);
-        script.onload = script.onerror = resolve;
-    });
+	return new Promise(function (resolve, reject) {
+		var s = document.createElement('script');
+		s.src = url;
+		s.onload = s.onreadystatechange = function () {
+			if (!this.readyState || this.readyState === 'complete') resolve();
+		};
+		s.onerror = s.onabort = reject;
+		document.head.appendChild(s);
+	});
 };
 
 var synchronous = exports.synchronous = function synchronous(urls) {
-    return new Promise(function (resolve, reject) {
-        var next = function next() {
-            if (!urls.length) return resolve();
-            var url = urls.shift();
-            create(url).then(next);
-        };
-        next();
-    });
+	return new Promise(function (resolve, reject) {
+		var next = function next() {
+			if (!urls.length) return resolve();
+			create(urls.shift()).then(next).catch(reject);
+		};
+		next();
+	});
 };
 
 exports.default = function (urls) {
-    var async = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+	var async = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-    if (!async) return synchronous(urls);
+	urls = [].concat(urls);
+	if (!async) return synchronous(urls);
 
-    return new Promise(function (resolve, reject) {
-        if (!!!Array.isArray(urls)) return reject();
-
-        return Promise.all(urls.map(function (url) {
-            return create(url);
-        })).then(resolve, reject);
-    });
+	return Promise.all(urls.map(function (url) {
+		return create(url);
+	}));
 };;
 }));
