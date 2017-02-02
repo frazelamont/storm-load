@@ -1,6 +1,6 @@
 /**
  * @name storm-load: Lightweight promise-based script loader
- * @version 0.4.0: Fri, 20 Jan 2017 16:57:35 GMT
+ * @version 0.4.2: Thu, 02 Feb 2017 16:37:14 GMT
  * @author stormid
  * @license MIT
  */
@@ -24,9 +24,12 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 var create = function create(url) {
+	var async = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
 	return new Promise(function (resolve, reject) {
 		var s = document.createElement('script');
 		s.src = url;
+		s.async = async;
 		s.onload = s.onreadystatechange = function () {
 			if (!this.readyState || this.readyState === 'complete') resolve();
 		};
@@ -39,7 +42,7 @@ var synchronous = exports.synchronous = function synchronous(urls) {
 	return new Promise(function (resolve, reject) {
 		var next = function next() {
 			if (!urls.length) return resolve();
-			create(urls.shift()).then(next).catch(reject);
+			create(urls.shift(), false).then(next).catch(reject);
 		};
 		next();
 	});

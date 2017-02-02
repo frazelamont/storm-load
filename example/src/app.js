@@ -1,7 +1,7 @@
 import Load from './libs/storm-load';
 
 const onDOMContentLoadedTasks = [() => {
-    Load(['//d3js.org/d3.v3.min.js'])
+    Load('//d3js.org/d3.v3.min.js')
         .then(() =>{
             let data = [4, 8, 15, 16, 23, 42];
 

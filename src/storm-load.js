@@ -1,7 +1,8 @@
-const create = url => {
+const create = (url, async = true) => {
 	return new Promise((resolve, reject) => {
 		let s = document.createElement('script');
 		s.src = url;
+		s.async = async;
 		s.onload = s.onreadystatechange = function() {
 			if (!this.readyState || this.readyState === 'complete') resolve();
 		};
@@ -14,7 +15,7 @@ export const synchronous = urls => {
 	return new Promise((resolve, reject) => {
 		let next = () => {
 			if (!urls.length) return resolve();
-			create(urls.shift()).then(next).catch(reject);
+			create(urls.shift(), false).then(next).catch(reject);
 		};
 		next();
 	});
