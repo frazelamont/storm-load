@@ -14,14 +14,13 @@
     <meta property="og:description" content="">
     <meta property="og:site_name" content="">
     <meta name="application-name" content="">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-okaidia.min.css">
     <style>
         * {
             margin:0;
             padding:0;
             box-sizing:border-box;
-            font-family: 'Open Sans', sans-serif;
+            font-family: sans-serif;
         }
         html,
         body {
@@ -35,11 +34,19 @@
             margin:24px 0;
             border:0 none;
         }
-        h1,
-        h2,
-        h3 {
-            font: 1.25rem/1.2 'Open Sans', sans-serif;
+        h1 {
+            font: 1.25rem/1.2 sans-serif;
             margin-bottom:1.5rem;
+        }
+        h2 {
+            font: 1.1rem/1.2 sans-serif;
+            margin-bottom:12px;
+            padding-top:12px;
+        }
+        h3 {
+            font: 1rem/1.2 sans-serif;
+            margin-bottom:12px;
+            padding-top:12px;
         }
         p {
             margin-bottom:1.5rem;
@@ -54,6 +61,11 @@
             overflow:hidden;
             margin:0 auto;
             width:80%;
+            max-width:1200px;
+        }
+        .row {
+            margin-left:-30px;
+            overflow:hidden
         }
         .chart {
             margin-bottom:40px;
@@ -97,12 +109,19 @@
         <p>Import and initialise using a named import:</p>
         <pre><code class="language-js">import Load from 'storm-load;
 
-Load('/content/js/async/storm-component-boilerplate.js')
+Load('script-name.js')
     .then(() => {
-        StormComponentBoilerplate.init('.js-component-boilerplate');
-    });</code></pre>
+        //use loaded JS
+    });
+
+//synchronous loading
+Load(['script-1.js', 'script-that-depends-on-script-1.js'], false)
+    .then(() => {
+        //use loaded JS
+    });
+</code></pre>
     </div>
     <script src="./js/app.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
 </body>
 </html>

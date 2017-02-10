@@ -6,6 +6,9 @@
 
 Lightweight promise-based script loader for asynchronous and synchronous JS loading
 
+##Example
+[https://mjbp.github.io/storm-load](https://mjbp.github.io/storm-load)
+
 ##Usage
 
 JS
@@ -16,32 +19,20 @@ either using es6 import
 ```
 import Load from 'storm-load;
 
-Load('/content/js/async/storm-component-boilerplate.js')
+//asynchronous script loading
+Load('script-name.js')
     .then(() => {
-        StormComponentBoilerplate.init('.js-component-boilerplate');
+        //use loaded JS
     });
-```
-or es5 commonjs (legacy)
-```
-var Load = require('storm-load');
 
-Load('/content/js/async/storm-component-boilerplate.js')
+//synchronous loading
+Load(['script-1.js', 'script-that-depends-on-script-1.js'], false)
     .then(() => {
-        StormComponentBoilerplate.init('.js-component-boilerplate');
+        //use loaded JS
     });
+
+
 ```
-
-
-##Example
-[https://mjbp.github.io/storm-load](https://mjbp.github.io/storm-load)
-
-
-##API
-####`Load([url])`
-Loads an array of scripts asynchronously, returning a promise
-
-####`Load([url], false)`
-Loads an array of scripts synchronously (in order), returning a promise
 
 ##Tests
 ```
