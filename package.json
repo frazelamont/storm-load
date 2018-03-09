@@ -6,10 +6,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mjbp/storm-load.git"
+    "url": "https://github.com/stormid/storm-load.git"
   },
   "bugs": {
-    "url": "https://github.com/mjbp/storm-load/issues"
+    "url": "https://github.com/stormid/storm-load/issues"
   },
   "main": "dist/storm-load.js",
   "keywords": [
@@ -23,8 +23,9 @@
   "scripts": {
     "build": "gulp build",
     "start": "gulp",
-    "test": "istanbul cover _mocha && codecov",
-    "test:watch": "NODE_ENV=test mocha --watch"
+    "test": "_mocha",
+    "test:watch": "NODE_ENV=test mocha --watch",
+    "test:coverage": "istanbul cover _mocha && codecov"
   },
   "browserify": {
     "transform": [
