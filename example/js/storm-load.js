@@ -1,6 +1,6 @@
 /**
  * @name storm-load: Lightweight promise-based script loader
- * @version 1.0.2: Fri, 09 Mar 2018 16:01:43 GMT
+ * @version 1.0.3: Fri, 29 Jun 2018 12:47:49 GMT
  * @author stormid
  * @license MIT
  */
